@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Input, List, notification, Row } from 'antd'
+import { Button, Col, Divider, Input, List, notification, Row } from 'antd'
 import { useEffect, useState } from 'react';
 import axios from '../config/axios';
 import TodoItem from '../containers/TodoItem';
@@ -40,6 +40,7 @@ function Todo(props) {
     const onLogout = () => {
         LocalStorageService.clearToken();
         props.history.push("/login")
+        props.setRole('guest')
     }
 
     const onLogin = () => {
@@ -56,7 +57,7 @@ function Todo(props) {
                 <Col span={2}>
                     <Button onClick={createTodo} style={{ width: "100%", color: "white", backgroundColor: "cornflowerblue" }}>Add</Button>
                 </Col>
-                {false ?
+                {true ?
                     <Col span={2}>
                         <Button onClick={onLogout} style={{ width: "100%", color: "white", backgroundColor: "salmon" }}>Logout</Button>
                     </Col>
@@ -65,6 +66,11 @@ function Todo(props) {
                         <Button onClick={onLogin} style={{ width: "100%", color: "white", backgroundColor: "salmon" }}>Login</Button>
                     </Col>
                 }
+            </Row>
+            <Row>
+                <Col>
+                    <Divider />
+                </Col>
             </Row>
             <Row justify="center">
                 <Col span={12}>

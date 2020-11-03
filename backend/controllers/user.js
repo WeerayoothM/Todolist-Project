@@ -9,7 +9,7 @@ const register = async (req, res) => {
     if (targetUser) {
         res.status(400).send({ message: 'Username been taken' })
     } else {
-        const salt = bcrypt.genSaltSync(12);
+        const salt = bcrypt.genSaltSync(+process.env.SALT_ROUND);
         const hashPassword = bcrypt.hashSync(password, salt);
 
         const newUser = await db.User.create({
@@ -31,7 +31,7 @@ const login = async (req, res) => {
             const isCorrectPassword = bcrypt.compare(password, targetUser.password)
             if (isCorrectPassword) {
                 const payload = { id: targetUser.id, name: targetUser.name };
-                const token = jwt.sign(payload, "ieieieieieieieie", { expiresIn: 3600 });
+                const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 3600 });
 
                 res.status(200).send({ token })
 

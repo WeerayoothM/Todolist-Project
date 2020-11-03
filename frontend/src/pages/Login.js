@@ -9,10 +9,6 @@ function Login(props) {
         labelCol: { span: 4 },
         wrapperCol: { span: 20 },
     };
-    const tailLayout = {
-        wrapperCol: { offset: 12, span: 12 },
-    };
-
     const onFinish = ({ username, password }) => {
         axios.post('/users/login', { username, password })
             .then(res => {
@@ -20,7 +16,8 @@ function Login(props) {
                     description: "Login success"
                 })
                 LocalStorageService.setToken(res.data.token);
-                props.history.push('/');
+                props.history.push('/todo');
+                props.setRole('user')
             })
             .catch(err => {
                 console.log(err)

@@ -1,17 +1,13 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
-import Login from './pages/Login';
-import NotFound from './pages/NotFound';
-import Todo from './pages/Todo';
+import PrivateRoutes from './containers/PrivateRoutes';
+import LocalStorageService from './services/localStorage.js';
 
 function App() {
+  const [role, setRole] = useState(LocalStorageService.getRole());
+
   return (
-    <Switch>
-      <Route exact path="/" component={Todo} />
-      <Route path="/login" component={Login} />
-      <Route path="*" component={NotFound} />
-    </Switch>
+    <PrivateRoutes role={role} setRole={setRole} />
   )
 }
 

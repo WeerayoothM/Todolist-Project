@@ -10,8 +10,22 @@ const clearToken = () => {
     localStorage.clear();
 };
 
+const getRole = () => {
+    if (getToken()) {
+        return "user";
+    }
+    return "guest";
+};
+// const localStorage = {
+//     getToken,
+//     setToken,
+//     clearToken,
+//     getRole,
+// }
+
 export default {
     getToken,
     setToken,
-    clearToken
+    clearToken,
+    getRole,
 };
