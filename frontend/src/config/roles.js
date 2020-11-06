@@ -10,6 +10,7 @@ const allPages = {
         url: '/todo',
         page: Todo,
     }
+    
 };
 
 const permissionList = {
